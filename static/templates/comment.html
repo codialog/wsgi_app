@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="inputArea">
+<form method="POST">
+    Фамилия: <label><input type="text" id="surname" name="surname "/></label><br/>
+    Имя: <label><input type="text" id="name" name="name"/></label><br/>
+    Отчество: <label><input type="text" id="middle_name" name="middle_name"/></label><br/>
+    Регион: <label><input type="text" id="region" name="region"/></label><br/>
+    Город: <label><input type="text" id="city" name="city"/></label><br/>
+    Контактный телефон: <label><input type="text" id="phone" name="phone"/></label><br/>
+    E-mail: <label><input type="text" id="email" name="email"/></label><br/>
+    Комментарий: <label><input type="text" id="comment" name="comment"/></label><br/>
+    <input type="submit" value="Отправить">
+</form>
+</div>
+
+{% endblock %}

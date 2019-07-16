@@ -1,0 +1,72 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="http://magnit-info.ru/favicon.ico" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(".delete-row").click(function(){
+                    var feedback_id = $("#id").val();
+                    $.ajax({
+                        url: '/view',
+                        method: 'DELETE',
+                                      data: json,
+              contentType: 'application/json;charset=UTF-8',
+              success: function() {
+                           alert("Done");
+                       }
+                         success: function (data, textStatus, xhr) {
+                             console.log(data);
+                         },
+                         error: function (xhr, textStatus, errorThrown) {
+                             console.log('Error in Operation');
+                         }
+                    });
+                });
+            });
+        </script>
+        <style type="text/css">
+            body {
+                font-family: Arial, Sans-Serif;
+                font-size: 13px;
+                }
+            #inputArea
+            {
+                font-family: Arial, Sans-Serif;
+                font-size: 13px;
+                margin:0 auto;
+                padding: 20px;
+                width:310px;
+            }
+
+            #inputArea input, #inputArea textarea
+                {
+                font-family: Arial, Sans-Serif;
+                font-size: 13px;
+                margin-bottom: 5px;
+                display: block;
+                padding: 4px;
+                width: 300px;
+                }
+            th {
+                color: #000;
+            }
+            td {
+                background: #fff;
+                text-align: center;
+                }
+            td, th {
+                padding: 5px 10px;
+                vertical-align: top;
+                text-align: left;
+                border: 1px solid black;
+                }
+        </style>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

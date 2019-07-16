@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Отзывы</h1>
+<form action="/view" method="DELETE">
+    <table>
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Регион</th>
+                <th>Город</th>
+                <th>Телефон</th>
+                <th>Email</th>
+                <th>Комментарий</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in all_feedback %}
+                <tr>
+                    <td>{{feedback.surname}}</td>
+                    <td>{{feedback.name}}</td>
+                    <td>{{feedback.middle_name}}</td>
+                    <td>{{feedback.region}}</td>
+                    <td>{{feedback.city}}</td>
+                    <td>{{feedback.phone}}</td>
+                    <td>{{feedback.email}}</td>
+                    <td>{{feedback.comment}}</td>
+                    <td>
+                        <button type="button" id="{{feedback.feedback_id}}" class="delete-row">Удалить</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+{% endblock %}
