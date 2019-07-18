@@ -36,8 +36,16 @@ class CityDB(BaseDB):
             for cities in data:
                 for city in cities:
                     cursor.execute(query, city)
+                    print('Preparing "City" DB: {}'.format(city[-1]))
                 connect.commit()
+            print('Preparing "City" DB: SUCCESSFULLY')
+        except sqlite3.IntegrityError:
+            print('Preparing "City" DB: SUCCESSFULLY')
         except Exception as ex:
             print(ex)
         finally:
             connect.close()
+
+    def prepare_city_db(self, data):
+        self.create_db_if_not_exists()
+        self.fill_city_table(data)

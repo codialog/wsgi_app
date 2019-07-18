@@ -4,6 +4,8 @@ from jinja2 import Environment, FileSystemLoader
 from cgi_bin.feedback import Feedback
 from core.common import get_root_dir
 from sql import feedack_db
+from sql.feedack_db import FeedbackDB
+
 
 def render_template(template_name, **kwargs):
     template_folder = os.path.join(get_root_dir(), 'static', 'templates')
@@ -26,7 +28,7 @@ def home_handler(environ):
 def comment_handler(environ):
     if environ['REQUEST_METHOD'] == 'POST':
         feedback = Feedback().env_object_factory(environ)
-        feedack_db.FeedbackDB().add_feedback(feedback)
+        FeedbackDB().add_feedback(feedback)
         return notify_handler(feedback)
     return render_template('comment', title='Обратная связь')
 

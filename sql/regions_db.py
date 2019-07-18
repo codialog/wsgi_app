@@ -8,6 +8,7 @@ class RegionDB(BaseDB):
     def __init__(self):
         BaseDB.__init__(self)
         self.table_name = 'region'
+        self.primary_key = 'region_id'
 
     def create_db_if_not_exists(self):
         connect = sqlite3.connect(self.db_path)
@@ -35,8 +36,16 @@ class RegionDB(BaseDB):
         try:
             for region in data:
                 cursor.execute(query, region)
-                connect.commit()
+                print('Preparing "Region" DB: {}'.format(region[-1]))
+            connect.commit()
+            print('Preparing "Region" DB: SUCCESSFULLY')
+        except sqlite3.IntegrityError:
+            print('Preparing "Region" DB: SUCCESSFULLY')
         except Exception as ex:
             print(ex)
         finally:
             connect.close()
+
+    def prepare_region_db(self, data):
+        self.create_db_if_not_exists()
+        self.fill_region_table(data)

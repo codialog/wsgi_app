@@ -1,7 +1,7 @@
 from sql import precondition
 from render import not_found
 from view import routes
-
+from wsgiref.simple_server import make_server
 
 class Application(object):
 
@@ -26,7 +26,6 @@ if __name__ == '__main__':
     try:
         port = 8080
         precondition.prepare_db()
-        from wsgiref.simple_server import make_server
         httpd = make_server('localhost', port, Application(routes))
         print('Serving on port {}...'.format(httpd.server_port))
         httpd.serve_forever()

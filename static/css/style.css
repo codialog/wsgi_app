@@ -1,14 +1,36 @@
-table {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 24px;
-    border-collapse: collapse;
+
+body {
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    }
+#inputArea
+{
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    margin:0 auto;
+    padding: 20px;
+    width:310px;
+}
+
+#inputArea input, #inputArea textarea
+    {
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: block;
+    padding: 4px;
+    width: 300px;
+    }
+th {
+    color: #000;
+}
+td {
+    background: #fff;
     text-align: center;
     }
-
-td {
-    background: #D8E6F3;
-}
-
-th:first-child, td:first-child {
-text-align: left;
-}
+td, th {
+    padding: 5px 10px;
+    vertical-align: top;
+    text-align: left;
+    border: 1px solid black;
+    }

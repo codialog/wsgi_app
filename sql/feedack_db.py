@@ -16,9 +16,9 @@ class FeedbackDB(BaseDB):
         query = """
             CREATE TABLE IF NOT EXISTS {}(
                 feedback_id INTEGER PRIMARY KEY, 
-                surname text NOT NULL,
+                s_name text NOT NULL,
                 name text NOT NULL,
-                middle_name text,
+                m_name text,
                 region text,
                 city text,
                 phone text,
@@ -28,27 +28,28 @@ class FeedbackDB(BaseDB):
         cursor.execute(query)
         connect.commit()
         connect.close()
+        print('Preparing "Feedback" DB: SUCCESSFULLY')
 
     def add_feedback(self, feedback):
         connect = sqlite3.connect(self.db_path)
         cursor = connect.cursor()
         query = """
             INSERT INTO {}(
-                surname, name, middle_name, region, city, phone, email, comment
+                s_name, name, m_name, region, city, phone, email, comment
                 ) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """.format(self.table_name)
         try:
-            cursor.execute(query,(feedback.surname,
-                                  feedback.name,
-                                  feedback.middle_name,
-                                  feedback.region,
-                                  feedback.city,
-                                  feedback.phone,
-                                  feedback.email,
-                                  feedback.comment))
+            cursor.execute(query,(feedback.get_field('s_name'),
+                                  feedback.get_field('name'),
+                                  feedback.get_field('m_name'),
+                                  feedback.get_field('region'),
+                                  feedback.get_field('city'),
+                                  feedback.get_field('phone'),
+                                  feedback.get_field('email'),
+                                  feedback.get_field('comment')))
         except Exception as ex:
-            pass
+            print(ex)
         connect.commit()
         connect.close()
 

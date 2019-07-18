@@ -34,8 +34,16 @@ class CountryDB(BaseDB):
         try:
             for country in data:
                 cursor.execute(query, country)
-                connect.commit()
+                print('Preparing "Country" DB: {}'.format(country[-1]))
+            connect.commit()
+            print('Preparing "Country" DB: SUCCESSFULLY')
+        except sqlite3.IntegrityError:
+            print('Preparing "Country" DB: SUCCESSFULLY')
         except Exception as ex:
             print(ex)
         finally:
             connect.close()
+
+    def prepare_country_db(self, data):
+        self.create_db_if_not_exists()
+        self.fill_country_table(data)

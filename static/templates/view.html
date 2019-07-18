@@ -19,16 +19,16 @@
         <tbody>
             {% for feedback in all_feedback %}
                 <tr>
-                    <td>{{feedback.surname}}</td>
+                    <td>{{feedback.s_name}}</td>
                     <td>{{feedback.name}}</td>
-                    <td>{{feedback.middle_name}}</td>
+                    <td>{{feedback.m_name}}</td>
                     <td>{{feedback.region}}</td>
                     <td>{{feedback.city}}</td>
                     <td>{{feedback.phone}}</td>
                     <td>{{feedback.email}}</td>
                     <td>{{feedback.comment}}</td>
                     <td>
-                        <button type="button" id="{{feedback.feedback_id}}" class="delete-row">Удалить</button>
+                        <button type="button" id="{{feedback.feedback_id}}" class="delete-feedback">Удалить</button>
                     </td>
                 </tr>
             {% endfor %}
