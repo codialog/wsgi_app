@@ -30,7 +30,7 @@ class FeedbackDB(BaseDB):
         connect.close()
         print('Preparing "Feedback" DB: SUCCESSFULLY')
 
-    def add_feedback(self, feedback):
+    def set(self, feedback):
         connect = sqlite3.connect(self.db_path)
         cursor = connect.cursor()
         query = """
@@ -40,20 +40,20 @@ class FeedbackDB(BaseDB):
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """.format(self.table_name)
         try:
-            cursor.execute(query,(feedback.get_field('s_name'),
-                                  feedback.get_field('name'),
-                                  feedback.get_field('m_name'),
-                                  feedback.get_field('region'),
-                                  feedback.get_field('city'),
-                                  feedback.get_field('phone'),
-                                  feedback.get_field('email'),
-                                  feedback.get_field('comment')))
+            cursor.execute(query, (feedback.__get_field('s_name'),
+                                  feedback.__get_field('name'),
+                                  feedback.__get_field('m_name'),
+                                  feedback.__get_field('region'),
+                                  feedback.__get_field('city'),
+                                  feedback.__get_field('phone'),
+                                  feedback.__get_field('email'),
+                                  feedback.__get_field('comment')))
         except Exception as ex:
             print(ex)
         connect.commit()
         connect.close()
 
-    def get_all_feedback(self):
+    def get_all(self):
         connect = sqlite3.connect(self.db_path)
         cursor = connect.cursor()
         query = """
@@ -69,7 +69,7 @@ class FeedbackDB(BaseDB):
         return all_feedback
 
     def get_region_list_by_region(self, min_count_comment):
-        all_feedback = self.get_all_feedback()
+        all_feedback = self.get_all()
         all_regions = {}
         for feedback in all_feedback:
             cur_region = feedback['region']
@@ -77,7 +77,7 @@ class FeedbackDB(BaseDB):
             count = 0 if not count else count
             all_regions.update({cur_region: count+1})
 
-    def delete_feedback(self, feedback):
+    def delete(self, feedback):
         connect = sqlite3.connect(self.db_path)
         cursor = connect.cursor()
         query = """

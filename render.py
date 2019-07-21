@@ -28,12 +28,12 @@ def home_handler(environ):
 def comment_handler(environ):
     if environ['REQUEST_METHOD'] == 'POST':
         feedback = Feedback().env_object_factory(environ)
-        FeedbackDB().add_feedback(feedback)
+        FeedbackDB().set(feedback)
         return notify_handler(feedback)
     return render_template('comment', title='Обратная связь')
 
 def view_handler(environ):
-    all_feedback = feedack_db.FeedbackDB().get_all_feedback()
+    all_feedback = feedack_db.FeedbackDB().get_all()
     return render_template('view', title='Обзор отзывов',
                            all_feedback=all_feedback)
 
